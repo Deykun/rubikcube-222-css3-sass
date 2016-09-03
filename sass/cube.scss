@@ -1,0 +1,121 @@
+@import 'variables';
+@import 'gui';
+
+* {
+	box-sizing: border-box;
+}
+
+#space {
+	margin: 50px auto;
+	width: 200px;
+	height: 200px;
+	position: relative;
+
+	perspective: 850px;
+}
+
+/* Cube */
+.cube {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	transform-style: preserve-3d;
+	transition: transform .4s;
+
+}
+
+.cube > div {
+	position: absolute;
+  background: linear-gradient(to right top, #3a3a3a, #2f2f2f);
+  border: 2px solid rgba(58, 58, 58, 0.4);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  backface-visibility: hidden;
+  height: 100px;
+  width: 100px;
+  padding: 10px; }
+
+.cube .front { transform: rotateY(  0deg ) translateZ( 50px );}
+.cube .back  { transform: rotateX( 180deg ) translateZ( 50px );}
+.cube .right { transform: rotateY( 90deg ) translateZ( 50px );}
+.cube .left  { transform: rotateY( -90deg ) translateZ( 50px );}
+.cube .top  {	transform: rotateX( 90deg ) translateZ( 50px );}
+.cube .bottom {	transform: rotateX( -90deg ) translateZ( 50px );}
+
+/* Stickers */
+.cube > div > div {
+	height: 100%;
+	width: 100%;
+	border-radius: 10px;
+	z-index: 100;
+}
+
+.white {background: linear-gradient( to right top, #d1d1d1, #fff );}
+.yellow {background: linear-gradient( to right top, #efd038, #dab919 );}
+.blue {background: linear-gradient( to right top, #318edd, #257ac2 );}
+.green {background: linear-gradient( to right top, #72ae2b, #8ad137 );}
+.red {background: linear-gradient( to right top, #a0270f, #ae4b1b );}
+.orange {background: linear-gradient( to right top, #d97d50, #d86a35 );}
+
+/* Front */
+#x1y1z1 {
+	transform-origin: 50% 50% -50px;
+	transform: $translate11 $front;}
+
+#x1y2z1 {
+	transform-origin: 50% 0% -50px;
+	transform: $translate12 $front;}
+
+#x2y1z1 {
+	transform-origin: 0% 50% -50px;
+	transform: $translate21 $front;}
+
+#x2y2z1 {
+	transform-origin: 0% 0% -50px;
+	transform: $translate22 $front;}
+
+/* Back */
+#x1y1z2 {
+	transform-origin: 50% 50% -50px;
+	transform: $translate11 $back;}
+
+#x1y2z2 {
+	transform-origin: 50% 0% -50px;
+	transform: $translate12 $back;}
+
+#x2y1z2 {
+	transform-origin: 0% 50% -50px;
+	transform: $translate21 $back;}
+
+#x2y2z2 {
+	transform-origin: 0% 0% -50px;
+	transform: $translate22 $back;}
+
+.x #space:hover #x1y1z1 {	transform: $translate11 rotateX( rotate( $frontX , -90deg ) ) rotateY( $frontY ) rotateZ( -90deg );}
+.x #space:hover #x1y2z1 {	transform: $translate12 rotateX( rotate( $frontX , -90deg ) ) rotateY( $frontY ) rotateZ( -90deg );}
+.x #space:hover #x2y1z1 {	transform: $translate21 rotateX( rotate( $frontX , -90deg ) ) rotateY( $frontY ) rotateZ( -90deg );}
+.x #space:hover #x2y2z1 {	transform: $translate22 rotateX( rotate( $frontX , -90deg ) ) rotateY( $frontY ) rotateZ( -90deg );}
+
+.x #space:hover #x1y1z2 {	transform: $translate11 rotateX( rotate( $backX, -90deg ) ) rotateY( $backY ) rotateZ( 90deg );}
+.x #space:hover #x1y2z2 {	transform: $translate12 rotateX( rotate( $backX, -90deg ) ) rotateY( $backY ) rotateZ( 90deg );}
+.x #space:hover #x2y1z2 {	transform: $translate21 rotateX( rotate( $backX, -90deg ) ) rotateY( $backY ) rotateZ( 90deg );}
+.x #space:hover #x2y2z2 {	transform: $translate22 rotateX( rotate( $backX, -90deg ) ) rotateY( $backY ) rotateZ( 90deg );}
+
+.y #space:hover #x1y1z1, .ytop #x1y1z1 {	transform: $translate11 rotateX( $frontX ) rotateY( rotate( $frontY , -90deg ));}
+.y #space:hover #x1y2z1, .ybottom #x1y2z1 {	transform: $translate12 rotateX( $frontX ) rotateY( rotate( $frontY , -90deg ));}
+.y #space:hover #x2y1z1, .ytop #x2y1z1 {	transform: $translate21 rotateX( $frontX ) rotateY( rotate( $frontY , -90deg ));}
+.y #space:hover #x2y2z1, .ybottom #x2y2z1 {	transform: $translate22 rotateX( $frontX ) rotateY( rotate( $frontY , -90deg ));}
+
+.y #space:hover #x1y1z2, .ytop #x1y1z2 {	transform: $translate11 rotateX( $backX ) rotateY( rotate( $backY, -90deg ));}
+.y #space:hover #x1y2z2, .ybottom #x1y2z2 {	transform: $translate12 rotateX( $backX ) rotateY( rotate( $backY, -90deg ));}
+.y #space:hover #x2y1z2, .ytop #x2y1z2 {	transform: $translate21 rotateX( $backX ) rotateY( rotate( $backY, -90deg ));}
+.y #space:hover #x2y2z2, .ybottom #x2y2z2 {	transform: $translate22 rotateX( $backX ) rotateY( rotate( $backY, -90deg ));}
+
+.z #space:hover #x1y1z1, .zfront #x1y1z1 {	transform: $translate11 $front rotateZ( -90deg );}
+.z #space:hover #x1y2z1, .zfront #x1y2z1  {	transform: $translate12 $front rotateZ( -90deg );}
+.z #space:hover #x2y1z1, .zfront #x2y1z1  {	transform: $translate21 $front rotateZ( -90deg );}
+.z #space:hover #x2y2z1, .zfront #x2y2z1  {	transform: $translate22 $front rotateZ( -90deg );}
+
+.z #space:hover #x1y1z2, .zback #x1y1z2 {	transform: $translate11 $back rotateZ( 90deg );}
+.z #space:hover #x1y2z2, .zback #x1y2z2 {	transform: $translate12 $back rotateZ( 90deg );}
+.z #space:hover #x2y1z2, .zback #x2y1z2 {	transform: $translate21 $back rotateZ( 90deg );}
+.z #space:hover #x2y2z2, .zback #x2y2z2 {	transform: $translate22 $back rotateZ( 90deg );}

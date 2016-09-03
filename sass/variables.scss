@@ -1,0 +1,18 @@
+/* Cubes positions */
+$translate11: translateX(0) translateY(0);
+$translate12: translateX(0) translateY(100px);
+$translate21: translateX(100px) translateY(0);
+$translate22: translateX(100px) translateY(100px);
+
+/* Default rotation */
+$frontX: -15deg;
+$frontY: -45deg;
+$backX: -15deg;
+$backY: 135deg;
+
+$front: rotateX( $frontX ) rotateY( $frontY );
+$back: rotateX( $backX ) rotateY( $backY );
+
+@function rotate($base, $rotation){
+  @return $base + $rotation
+}
