@@ -6,10 +6,13 @@
 }
 
 #space {
-	margin: 50px auto;
+	margin: 100px auto;
 	width: 200px;
 	height: 200px;
-	position: relative;
+	position: fixed;
+	top:25%;
+	left:50%;
+	transform: translate(-50%,-50%);
 
 	perspective: 850px;
 }
@@ -20,26 +23,33 @@
 	height: 100%;
 	width: 100%;
 	transform-style: preserve-3d;
-	transition: transform .4s;
-
+	transition: transform 0s;
 }
 
-.cube > div {
+.solid > .cube > div {
 	position: absolute;
   background: linear-gradient(to right top, #3a3a3a, #2f2f2f);
   border: 2px solid rgba(58, 58, 58, 0.4);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
   backface-visibility: hidden;
+
   height: 100px;
   width: 100px;
-  padding: 10px; }
+  padding: 10px;
+	transition: .1s;
+}
 
-.cube .front { transform: rotateY(  0deg ) translateZ( 50px );}
-.cube .back  { transform: rotateX( 180deg ) translateZ( 50px );}
-.cube .right { transform: rotateY( 90deg ) translateZ( 50px );}
-.cube .left  { transform: rotateY( -90deg ) translateZ( 50px );}
-.cube .top  {	transform: rotateX( 90deg ) translateZ( 50px );}
-.cube .bottom {	transform: rotateX( -90deg ) translateZ( 50px );}
+.glass > .cube > div {
+	position: absolute;
+	background: rgba(212, 192, 192, 0.12);
+	border: 2px solid rgba(255, 255, 255, 0.52);
+	box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+
+  height: 100px;
+  width: 100px;
+  padding: 10px;
+	transition: .1s;
+}
 
 /* Stickers */
 .cube > div > div {
@@ -47,6 +57,13 @@
 	width: 100%;
 	border-radius: 10px;
 	z-index: 100;
+
+	transition: .1s;
+}
+
+.glass > .cube > div > div {
+	opacity: 0.9;
+	border-radius: 50%;
 }
 
 .white {background: linear-gradient( to right top, #d1d1d1, #fff );}
@@ -55,6 +72,57 @@
 .green {background: linear-gradient( to right top, #72ae2b, #8ad137 );}
 .red {background: linear-gradient( to right top, #a0270f, #ae4b1b );}
 .orange {background: linear-gradient( to right top, #d97d50, #d86a35 );}
+
+
+/* TOP */
+#x1y1z1.cube {
+	.top { transform: $cubeTop; }
+	.front { transform: $cubeLeft; }
+	.right { transform: $cubeFront; }
+}
+
+#x2y1z1.cube {
+	.top {	transform: $cubeTop; }
+	.front { transform: $cubeFront; }
+	.right { transform: $cubeRight; }
+}
+
+#x1y1z2 {
+	.top {	transform: $cubeTop; }
+	.front { transform: $cubeLeft; }
+	.right { transform: $cubeFront; }
+}
+
+#x2y1z2.cube {
+	.top {	transform: $cubeTop;}
+	.front { transform: $cubeFront;}
+	.right { transform: $cubeRight;}
+}
+
+/* BOTTOM */
+#x1y2z1.cube {
+	.top { transform: $cubeBottom; }
+	.front { transform: $cubeLeft; }
+	.right { transform: $cubeFront; }
+}
+
+#x2y2z1.cube {
+	.top {	transform: $cubeBottom; }
+	.front { transform: $cubeFront; }
+	.right { transform: $cubeRight; }
+}
+
+#x1y2z2 {
+	.top {	transform: $cubeBottom; }
+	.front { transform: $cubeLeft; }
+	.right { transform: $cubeFront; }
+}
+
+#x2y2z2.cube {
+	.top {	transform: $cubeBottom;}
+	.front { transform: $cubeFront;}
+	.right { transform: $cubeRight;}
+}
 
 /* Front */
 #x1y1z1 {
@@ -90,32 +158,156 @@
 	transform-origin: 0% 0% -50px;
 	transform: $translate22 $back;}
 
-.x #space:hover #x1y1z1 {	transform: $translate11 rotateX( rotate( $frontX , -90deg ) ) rotateY( $frontY ) rotateZ( -90deg );}
-.x #space:hover #x1y2z1 {	transform: $translate12 rotateX( rotate( $frontX , -90deg ) ) rotateY( $frontY ) rotateZ( -90deg );}
-.x #space:hover #x2y1z1 {	transform: $translate21 rotateX( rotate( $frontX , -90deg ) ) rotateY( $frontY ) rotateZ( -90deg );}
-.x #space:hover #x2y2z1 {	transform: $translate22 rotateX( rotate( $frontX , -90deg ) ) rotateY( $frontY ) rotateZ( -90deg );}
+.y #space:hover {
+	#x1y1z1 { transform: $translate11 rotateX( $frontX ) rotateY( rotate( $frontY , 135deg )); }
+ 	#x1y2z1 { transform: $translate12 rotateX( $frontX ) rotateY( rotate( $frontY , 135deg )); }
+	#x2y1z1 { transform: $translate21 rotateX( $frontX ) rotateY( rotate( $frontY , 135deg )); }
+	#x2y2z1 { transform: $translate22 rotateX( $frontX ) rotateY( rotate( $frontY , 135deg )); }
+	#x1y1z2 { transform: $translate11 rotateX( $backX ) rotateY( rotate( $backY, 135deg )); }
+ 	#x1y2z2 { transform: $translate12 rotateX( $backX ) rotateY( rotate( $backY, 135deg )); }
+	#x2y1z2 { transform: $translate21 rotateX( $backX ) rotateY( rotate( $backY, 135deg )); }
+	#x2y2z2 { transform: $translate22 rotateX( $backX ) rotateY( rotate( $backY, 135deg )); }
+}
 
-.x #space:hover #x1y1z2 {	transform: $translate11 rotateX( rotate( $backX, -90deg ) ) rotateY( $backY ) rotateZ( 90deg );}
-.x #space:hover #x1y2z2 {	transform: $translate12 rotateX( rotate( $backX, -90deg ) ) rotateY( $backY ) rotateZ( 90deg );}
-.x #space:hover #x2y1z2 {	transform: $translate21 rotateX( rotate( $backX, -90deg ) ) rotateY( $backY ) rotateZ( 90deg );}
-.x #space:hover #x2y2z2 {	transform: $translate22 rotateX( rotate( $backX, -90deg ) ) rotateY( $backY ) rotateZ( 90deg );}
+.z #space:hover {
+	#x1y1z1 {	transform: $translate11 $front rotateZ( -135deg ); }
+	#x1y2z1 { transform: $translate12 $front rotateZ( -135deg ); }
+	#x2y1z1 { transform: $translate21 $front rotateZ( -135deg ); }
+	#x2y2z1 { transform: $translate22 $front rotateZ( -135deg ); }
+	#x1y1z2 {	transform: $translate11 $back rotateZ( 135deg ); }
+	#x1y2z2 {	transform: $translate12 $back rotateZ( 135deg ); }
+	#x2y1z2 {	transform: $translate21 $back rotateZ( 135deg ); }
+	#x2y2z2 {	transform: $translate22 $back rotateZ( 135deg ); }
+}
 
-.y #space:hover #x1y1z1, .ytop #x1y1z1 {	transform: $translate11 rotateX( $frontX ) rotateY( rotate( $frontY , -90deg ));}
-.y #space:hover #x1y2z1, .ybottom #x1y2z1 {	transform: $translate12 rotateX( $frontX ) rotateY( rotate( $frontY , -90deg ));}
-.y #space:hover #x2y1z1, .ytop #x2y1z1 {	transform: $translate21 rotateX( $frontX ) rotateY( rotate( $frontY , -90deg ));}
-.y #space:hover #x2y2z1, .ybottom #x2y2z1 {	transform: $translate22 rotateX( $frontX ) rotateY( rotate( $frontY , -90deg ));}
+.y #space, .y #space:hover, .z #space, .z #space:hover {
+	#x1y1z1, #x1y2z1, #x2y1z1, #x2y2z1, #x1y1z2, #x1y2z2, #x2y1z2, #x2y2z2 { transition: $lookduration; }
+}
 
-.y #space:hover #x1y1z2, .ytop #x1y1z2 {	transform: $translate11 rotateX( $backX ) rotateY( rotate( $backY, -90deg ));}
-.y #space:hover #x1y2z2, .ybottom #x1y2z2 {	transform: $translate12 rotateX( $backX ) rotateY( rotate( $backY, -90deg ));}
-.y #space:hover #x2y1z2, .ytop #x2y1z2 {	transform: $translate21 rotateX( $backX ) rotateY( rotate( $backY, -90deg ));}
-.y #space:hover #x2y2z2, .ybottom #x2y2z2 {	transform: $translate22 rotateX( $backX ) rotateY( rotate( $backY, -90deg ));}
+/* YTOP */
+.ytop {
+	#x1y1z1 {
+		transform: $translate11 rotateX( $frontX ) rotateY( rotate( $frontY , -90deg ));
+		transition: $moveduration; }
+ 	#x2y1z1 {
+		transform: $translate21 rotateX( $frontX ) rotateY( rotate( $frontY , -90deg ));
+		transition: $moveduration; }
+ 	#x1y1z2 {
+		transform: $translate11 rotateX( $backX ) rotateY( rotate( $backY, -90deg ));
+		transition: $moveduration; }
+ 	#x2y1z2 {
+		transform: $translate21 rotateX( $backX ) rotateY( rotate( $backY, -90deg ));
+		transition: $moveduration; }
+}
 
-.z #space:hover #x1y1z1, .zfront #x1y1z1 {	transform: $translate11 $front rotateZ( -90deg );}
-.z #space:hover #x1y2z1, .zfront #x1y2z1  {	transform: $translate12 $front rotateZ( -90deg );}
-.z #space:hover #x2y1z1, .zfront #x2y1z1  {	transform: $translate21 $front rotateZ( -90deg );}
-.z #space:hover #x2y2z1, .zfront #x2y2z1  {	transform: $translate22 $front rotateZ( -90deg );}
+/* REVYTOP */
+.revytop {
+	#x1y1z1 {
+		transform: $translate11 rotateX( $frontX ) rotateY( rotate( $frontY , 90deg ));
+		transition: $moveduration; }
+ 	#x2y1z1 {
+		transform: $translate21 rotateX( $frontX ) rotateY( rotate( $frontY , 90deg ));
+		transition: $moveduration; }
+ 	#x1y1z2 {
+		transform: $translate11 rotateX( $backX ) rotateY( rotate( $backY, 90deg ));
+		transition: $moveduration; }
+ 	#x2y1z2 {
+		transform: $translate21 rotateX( $backX ) rotateY( rotate( $backY, 90deg ));
+		transition: $moveduration; }
+}
 
-.z #space:hover #x1y1z2, .zback #x1y1z2 {	transform: $translate11 $back rotateZ( 90deg );}
-.z #space:hover #x1y2z2, .zback #x1y2z2 {	transform: $translate12 $back rotateZ( 90deg );}
-.z #space:hover #x2y1z2, .zback #x2y1z2 {	transform: $translate21 $back rotateZ( 90deg );}
-.z #space:hover #x2y2z2, .zback #x2y2z2 {	transform: $translate22 $back rotateZ( 90deg );}
+/* YBOTTOM */
+.ybottom {
+	#x1y2z1 {
+		transform: $translate12 rotateX( $frontX ) rotateY( rotate( $frontY , -90deg ));
+		transition: $moveduration; }
+	#x2y2z1 {
+		transform: $translate22 rotateX( $frontX ) rotateY( rotate( $frontY , -90deg ));
+		transition: $moveduration; }
+	#x1y2z2 {
+		transform: $translate12 rotateX( $backX ) rotateY( rotate( $backY, -90deg ));
+		transition: $moveduration; }
+	#x2y2z2 {
+		transform: $translate22 rotateX( $backX ) rotateY( rotate( $backY, -90deg ));
+		transition: $moveduration; }
+}
+
+/* REVYBOTTOM */
+.revybottom {
+	#x1y2z1 {
+		transform: $translate12 rotateX( $frontX ) rotateY( rotate( $frontY , 90deg ));
+		transition: $moveduration; }
+	#x2y2z1 {
+		transform: $translate22 rotateX( $frontX ) rotateY( rotate( $frontY , 90deg ));
+		transition: $moveduration; }
+	#x1y2z2 {
+		transform: $translate12 rotateX( $backX ) rotateY( rotate( $backY, 90deg ));
+		transition: $moveduration; }
+	#x2y2z2 {
+		transform: $translate22 rotateX( $backX ) rotateY( rotate( $backY, 90deg ));
+		transition: $moveduration; }
+}
+
+/* ZFRONT */
+.zfront {
+	#x1y1z1 {
+		transform: $translate11 $front rotateZ( -90deg );
+		transition: $moveduration; }
+	#x1y2z1 {
+		transform: $translate12 $front rotateZ( -90deg );
+		transition: $moveduration; }
+	#x2y1z1 {
+		transform: $translate21 $front rotateZ( -90deg );
+		transition: $moveduration; }
+	#x2y2z1 {
+		transform: $translate22 $front rotateZ( -90deg );
+		transition: $moveduration; }
+}
+
+/* REVZFRONT */
+.revzfront {
+	#x1y1z1 {
+		transform: $translate11 $front rotateZ( 90deg );
+		transition: $moveduration; }
+	#x1y2z1 {
+		transform: $translate12 $front rotateZ( 90deg );
+		transition: $moveduration; }
+	#x2y1z1 {
+		transform: $translate21 $front rotateZ( 90deg );
+		transition: $moveduration; }
+	#x2y2z1 {
+		transform: $translate22 $front rotateZ( 90deg );
+		transition: $moveduration; }
+}
+
+/* ZBACK */
+.zback {
+	#x1y1z2 {
+		transform: $translate11 $back rotateZ( 90deg );
+		transition: $moveduration; }
+	#x1y2z2 {
+		transform: $translate12 $back rotateZ( 90deg );
+		transition: $moveduration; }
+	#x2y1z2 {
+		transform: $translate21 $back rotateZ( 90deg );
+		transition: $moveduration; }
+	#x2y2z2 {
+		transform: $translate22 $back rotateZ( 90deg );
+		transition: $moveduration; }
+}
+
+/* REVZBACK */
+.revzback {
+	#x1y1z2 {
+		transform: $translate11 $back rotateZ( -90deg );
+		transition: $moveduration; }
+	#x1y2z2 {
+		transform: $translate12 $back rotateZ( -90deg );
+		transition: $moveduration; }
+	#x2y1z2 {
+		transform: $translate21 $back rotateZ( -90deg );
+		transition: $moveduration; }
+	#x2y2z2 {
+		transform: $translate22 $back rotateZ( -90deg );
+		transition: $moveduration; }
+}

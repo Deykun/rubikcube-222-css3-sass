@@ -1,35 +1,118 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
 body {
 	color: #fff;
-	font-family: 'Shadows Into Light Two', cursive;
+	font-family: 'Roboto', sans-serif;
 	text-align: center;
-	background-color: #4b5135;
+	background-color: #444;
 }
 
-h2, h4 {
-	letter-spacing: 0.25em;
-}
+.moves, .settings, .view {
+	position: fixed;
+	padding: 10px;
+	@media (max-width:500px) {
+		padding: 2px;
+	}
 
-.menu {
-	margin: 10px auto;
-}
-
-button {
-	padding: 10px 20px;
-	background-color: #d1d1d1;
-	border: 1px solid #d1d1d1;
-	border-radius: 15px;
-	transition: .2s;
-	&:hover {
+	text-align: center;
+	color: #444;
 	background-color: #fff;
+	background: linear-gradient(to top, #ececec, #fff);
+
+	section {
+		margin: 10px;
+		display: inline-block;
+		width: 140px;
+		@media (max-width:500px) {
+			width: 105px;
+		}
 	}
 }
 
-.menu > p {
-	width: 60%;
-	max-width: 500px;
-	margin: auto;
-	font-size: 12px;
-	font-family: Tahoma, sans-serif;
-	text-align: left;
-	text-indent: 4em;
+.moves {
+	bottom:0;
+
+	width: 100%;
+	padding-bottom: 5px;
+}
+
+.settings {
+	top:0;
+	right:0;
+
+	border-bottom-left-radius: 15px;
+
+	width: 100px;
+	padding-top: 5px;
+}
+
+.view {
+	top:0;
+	left:0;
+
+	border-bottom-right-radius: 15px;
+
+	width: 100px;
+	padding-top: 5px;
+}
+
+button {
+	height: 40px;
+
+	@media (max-width:500px) {
+		height: 30px;
+	}
+
+	background-color: #444;
+	border: 5px solid #444;
+
+	font-family: 'Roboto', sans-serif;
+	color: #fff;
+
+	transition: .3s;
+
+	&.left {
+		width: 90px;
+		@media (max-width:500px) {
+			width: 75px;
+			font-size: 60%;
+		}
+		border-right-color: #fff;
+		border-top-left-radius: 15px;
+		border-bottom-left-radius: 15px;
+	}
+
+	&.left:hover {
+		border-color: #000 #fff #000 #000;
+		background-color: #000;
+	}
+
+	&.right {
+		width: 40px;
+		@media (max-width:500px) {
+			width: 30px;
+			font-size: 60%;
+		}
+		color: #444;
+		border-color: #444;
+		background-color: #fff;
+		border-top-right-radius: 15px;
+		border-bottom-right-radius: 15px;
+	}
+
+	&.right:hover {
+		color: #fff;
+		background-color: #444;
+	}
+
+	&.viewpoint {
+		border-radius: 15px;
+	}
+	&.selected {
+		background-color: #000;
+		border-color: #000;
+	}
 }

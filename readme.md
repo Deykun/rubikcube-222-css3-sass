@@ -1,7 +1,13 @@
 # Kostka Rubika 2x2x2
-
-Prototyp trójwymiarowej kostki Rubika.
+Wirtualna wersja kostki mniejszej siostry kostki Rubika.
 
 **Wersja demonstracyjna :** http://deykun.boo.pl/lab/rubik222/
 
-![](http://deykun.boo.pl/lab/rubik222/rubikcube.gif)
+### Mieszanie kostki
+![](http://deykun.boo.pl/lab/rubik222/mieszanie.gif)
+
+### Podgląd niewidocznych ścian kostki
+![](http://deykun.boo.pl/lab/rubik222/podglad.gif)
+
+### Transparentna wersja kostki
+![](http://deykun.boo.pl/lab/rubik222/glass.gif)

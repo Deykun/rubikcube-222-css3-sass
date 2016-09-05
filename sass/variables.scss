@@ -1,3 +1,7 @@
+/* rotation duration */
+$moveduration: transform .3s;
+$lookduration: transform 1.5s;
+
 /* Cubes positions */
 $translate11: translateX(0) translateY(0);
 $translate12: translateX(0) translateY(100px);
@@ -13,6 +17,14 @@ $backY: 135deg;
 $front: rotateX( $frontX ) rotateY( $frontY );
 $back: rotateX( $backX ) rotateY( $backY );
 
+/* Default sides */
+$cubeFront: rotateY( 0deg ) translateZ( 50px );
+$cubeBack: rotateX(  180deg ) translateZ( 50px );
+$cubeRight: rotateY(  90deg ) translateZ( 50px );
+$cubeLeft: rotateY(  -90deg ) translateZ( 50px );
+$cubeTop: rotateX(  90deg ) translateZ( 50px );
+$cubeBottom: rotateX(  -90deg ) translateZ( 50px );
+
 @function rotate($base, $rotation){
   @return $base + $rotation
-}
+};

@@ -3,65 +3,69 @@
 <head>
 	<title>Kostka Rubika 2x2x2</title>
 	<meta charset="utf-8">
-	<link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link href="css/cube.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
-<body class="x">
-	<h2>Kostka Rubika 2x2x2</h2>
-	<div id="space" >
+<body class="">
+	<div id="space" class="solid">
 		<!-- BACK -->
 		<div class="cube" id="x2y1z2">
-					<div class="right"><div class="orange"></div></div>
-					<div class="top"><div class="blue"></div></div>
-					<div class="front"><div class="yellow"></div></div>
+				<div class="right"><div class="orange"></div></div>
+				<div class="top"><div class="blue"></div></div>
+				<div class="front"><div class="yellow"></div></div>
 		</div>
 		<div class="cube" id="x2y2z2">
-					<div class="bottom"><div class="green"></div></div>
-					<div class="right"><div class="orange"></div></div>
-					<div class="front"><div class="yellow"></div></div>
+				<div class="right"><div class="orange"></div></div>
+				<div class="top"><div class="green"></div></div>
+				<div class="front"><div class="yellow"></div></div>
 		</div>
 		<div class="cube" id="x1y1z2">
-					<div class="front"><div class="yellow"></div></div>
-					<div class="left"><div class="red"></div></div>
-					<div class="top"><div class="blue"></div></div>
+				<div class="right"><div class="yellow"></div></div>
+				<div class="top"><div class="blue"></div></div>
+				<div class="front"><div class="red"></div></div>
 		</div>
 		<div class="cube" id="x1y2z2">
-					<div class="bottom"><div class="green"></div></div>
-					<div class="left"><div class="red"></div></div>
-					<div class="front"><div class="yellow"></div></div>
+				<div class="right"><div class="yellow"></div></div>
+				<div class="top"><div class="green"></div></div>
+				<div class="front"><div class="red"></div></div>
 		</div>
 		<!-- FRONT -->
 		<div class="cube" id="x1y2z1">
-					<div class="bottom"><div class="green"></div></div>
-					<div class="left"><div class="orange"></div></div>
-					<div class="front"><div class="white"></div></div>
+				<div class="right"><div class="white"></div></div>
+				<div class="top"><div class="green"></div></div>
+				<div class="front"><div class="orange"></div></div>
 		</div>
 		<div class="cube" id="x1y1z1">
-					<div class="left"><div class="orange"></div></div>
-					<div class="top"><div class="blue"></div></div>
-					<div class="front"><div class="white"></div></div>
+				<div class="right"><div class="white"></div></div>
+				<div class="top"><div class="blue"></div></div>
+				<div class="front"><div class="orange"></div></div>
 		</div>
 		<div class="cube" id="x2y2z1">
-					<div class="bottom"><div class="green"></div></div>
-					<div class="right"><div class="red"></div></div>
-					<div class="front"><div class="white"></div></div>
+				<div class="right"><div class="red"></div></div>
+				<div class="top"><div class="green"></div></div>
+				<div class="front"><div class="white"></div></div>
 		</div>
 		<div class="cube" id="x2y1z1">
-					<div class="right"><div class="red"></div></div>
-					<div class="top"><div class="blue"></div></div>
-					<div class="front"><div class="white"></div></div>
+				<div class="right"><div class="red"></div></div>
+				<div class="top"><div class="blue"></div></div>
+				<div class="front"><div class="white"></div></div>
 		</div>
 
 	</div>
-	<div class="menu">
-		<h4>Po najechaniu myszką</h4>
-		<button id="x">x</button> | <button id="y">y</button> | <button id="z">z</button>
-		<h4>Przykłady ruchów</h4>
-		<button id="ytop">ytop</button> <button id="ybottom">ybottom</button> <button id="zfront">zfront</button> <button id="zback">zback</button>
-		<h4>Co dalej?</h4>
-		<p>Obecnie przesunięcie to wynik dodania klasy do elementu &lt;body&gt;, by stworzyć w pełni funkcjonalną kostkę trzeba napisać funkcje która podmieni kolory elementów tak, że przy jednoczesnym usunięciu wspomnianej klasy będziemy mieć taki sam stan kostki (chodzi o elementy rotateX, Y i Z) jak na początku z podmienionymi naklejkami. Użytkownik nie powinien tego zauważyć.</p>
+	<div class="moves">
+		<section><button id="revytop" class="left">top →</button><button id="ytop" class="right">←</button></section>
+		<section><button id="revybottom" class="left">bottom →</button><button id="ybottom" class="right">←</button></section>
+		<section><button id="revzfront" class="left">front ↓</button><button id="zfront" class="right">↑</button></section>
+		<section><button id="revzback" class="left">back ↓</button><button id="zback" class="right">↑</button></section>
 	</div>
+	<div class="settings">
+		<button id="cubeview" class="viewpoint">wygląd</button>
+	</div>
+	<div class="view">
+		<button id="y" class="viewpoint">y</button> <button id="z" class="viewpoint">z</button>
+	</div>
+
 	<script src="script.js"></script>
 </body>
 </html>

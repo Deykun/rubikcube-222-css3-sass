@@ -1,43 +1,107 @@
+/* rotation duration */
 /* Cubes positions */
 /* Default rotation */
+/* Default sides */
+html, body {
+  margin: 0;
+  padding: 0; }
+
 body {
   color: #fff;
-  font-family: 'Shadows Into Light Two', cursive;
+  font-family: 'Roboto', sans-serif;
   text-align: center;
-  background-color: #4b5135; }
+  background-color: #444; }
 
-h2, h4 {
-  letter-spacing: 0.25em; }
+.moves, .settings, .view {
+  position: fixed;
+  padding: 10px;
+  text-align: center;
+  color: #444;
+  background-color: #fff;
+  background: linear-gradient(to top, #ececec, #fff); }
+  @media (max-width: 500px) {
+    .moves, .settings, .view {
+      padding: 2px; } }
+  .moves section, .settings section, .view section {
+    margin: 10px;
+    display: inline-block;
+    width: 140px; }
+    @media (max-width: 500px) {
+      .moves section, .settings section, .view section {
+        width: 105px; } }
 
-.menu {
-  margin: 10px auto; }
+.moves {
+  bottom: 0;
+  width: 100%;
+  padding-bottom: 5px; }
+
+.settings {
+  top: 0;
+  right: 0;
+  border-bottom-left-radius: 15px;
+  width: 100px;
+  padding-top: 5px; }
+
+.view {
+  top: 0;
+  left: 0;
+  border-bottom-right-radius: 15px;
+  width: 100px;
+  padding-top: 5px; }
 
 button {
-  padding: 10px 20px;
-  background-color: #d1d1d1;
-  border: 1px solid #d1d1d1;
-  border-radius: 15px;
-  transition: .2s; }
-  button:hover {
-    background-color: #fff; }
-
-.menu > p {
-  width: 60%;
-  max-width: 500px;
-  margin: auto;
-  font-size: 12px;
-  font-family: Tahoma, sans-serif;
-  text-align: left;
-  text-indent: 4em; }
+  height: 40px;
+  background-color: #444;
+  border: 5px solid #444;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  transition: .3s; }
+  @media (max-width: 500px) {
+    button {
+      height: 30px; } }
+  button.left {
+    width: 90px;
+    border-right-color: #fff;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px; }
+    @media (max-width: 500px) {
+      button.left {
+        width: 75px;
+        font-size: 60%; } }
+  button.left:hover {
+    border-color: #000 #fff #000 #000;
+    background-color: #000; }
+  button.right {
+    width: 40px;
+    color: #444;
+    border-color: #444;
+    background-color: #fff;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px; }
+    @media (max-width: 500px) {
+      button.right {
+        width: 30px;
+        font-size: 60%; } }
+  button.right:hover {
+    color: #fff;
+    background-color: #444; }
+  button.viewpoint {
+    border-radius: 15px; }
+  button.selected {
+    background-color: #000;
+    border-color: #000; }
 
 * {
   box-sizing: border-box; }
 
 #space {
-  margin: 50px auto;
+  margin: 100px auto;
   width: 200px;
   height: 200px;
-  position: relative;
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   perspective: 850px; }
 
 /* Cube */
@@ -46,9 +110,9 @@ button {
   height: 100%;
   width: 100%;
   transform-style: preserve-3d;
-  transition: transform .4s; }
+  transition: transform 0s; }
 
-.cube > div {
+.solid > .cube > div {
   position: absolute;
   background: linear-gradient(to right top, #3a3a3a, #2f2f2f);
   border: 2px solid rgba(58, 58, 58, 0.4);
@@ -56,32 +120,30 @@ button {
   backface-visibility: hidden;
   height: 100px;
   width: 100px;
-  padding: 10px; }
+  padding: 10px;
+  transition: .1s; }
 
-.cube .front {
-  transform: rotateY(0deg) translateZ(50px); }
-
-.cube .back {
-  transform: rotateX(180deg) translateZ(50px); }
-
-.cube .right {
-  transform: rotateY(90deg) translateZ(50px); }
-
-.cube .left {
-  transform: rotateY(-90deg) translateZ(50px); }
-
-.cube .top {
-  transform: rotateX(90deg) translateZ(50px); }
-
-.cube .bottom {
-  transform: rotateX(-90deg) translateZ(50px); }
+.glass > .cube > div {
+  position: absolute;
+  background: rgba(212, 192, 192, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.52);
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+  height: 100px;
+  width: 100px;
+  padding: 10px;
+  transition: .1s; }
 
 /* Stickers */
 .cube > div > div {
   height: 100%;
   width: 100%;
   border-radius: 10px;
-  z-index: 100; }
+  z-index: 100;
+  transition: .1s; }
+
+.glass > .cube > div > div {
+  opacity: 0.9;
+  border-radius: 50%; }
 
 .white {
   background: linear-gradient(to right top, #d1d1d1, #fff); }
@@ -100,6 +162,64 @@ button {
 
 .orange {
   background: linear-gradient(to right top, #d97d50, #d86a35); }
+
+/* TOP */
+#x1y1z1.cube .top {
+  transform: rotateX(90deg) translateZ(50px); }
+#x1y1z1.cube .front {
+  transform: rotateY(-90deg) translateZ(50px); }
+#x1y1z1.cube .right {
+  transform: rotateY(0deg) translateZ(50px); }
+
+#x2y1z1.cube .top {
+  transform: rotateX(90deg) translateZ(50px); }
+#x2y1z1.cube .front {
+  transform: rotateY(0deg) translateZ(50px); }
+#x2y1z1.cube .right {
+  transform: rotateY(90deg) translateZ(50px); }
+
+#x1y1z2 .top {
+  transform: rotateX(90deg) translateZ(50px); }
+#x1y1z2 .front {
+  transform: rotateY(-90deg) translateZ(50px); }
+#x1y1z2 .right {
+  transform: rotateY(0deg) translateZ(50px); }
+
+#x2y1z2.cube .top {
+  transform: rotateX(90deg) translateZ(50px); }
+#x2y1z2.cube .front {
+  transform: rotateY(0deg) translateZ(50px); }
+#x2y1z2.cube .right {
+  transform: rotateY(90deg) translateZ(50px); }
+
+/* BOTTOM */
+#x1y2z1.cube .top {
+  transform: rotateX(-90deg) translateZ(50px); }
+#x1y2z1.cube .front {
+  transform: rotateY(-90deg) translateZ(50px); }
+#x1y2z1.cube .right {
+  transform: rotateY(0deg) translateZ(50px); }
+
+#x2y2z1.cube .top {
+  transform: rotateX(-90deg) translateZ(50px); }
+#x2y2z1.cube .front {
+  transform: rotateY(0deg) translateZ(50px); }
+#x2y2z1.cube .right {
+  transform: rotateY(90deg) translateZ(50px); }
+
+#x1y2z2 .top {
+  transform: rotateX(-90deg) translateZ(50px); }
+#x1y2z2 .front {
+  transform: rotateY(-90deg) translateZ(50px); }
+#x1y2z2 .right {
+  transform: rotateY(0deg) translateZ(50px); }
+
+#x2y2z2.cube .top {
+  transform: rotateX(-90deg) translateZ(50px); }
+#x2y2z2.cube .front {
+  transform: rotateY(0deg) translateZ(50px); }
+#x2y2z2.cube .right {
+  transform: rotateY(90deg) translateZ(50px); }
 
 /* Front */
 #x1y1z1 {
@@ -135,76 +255,153 @@ button {
   transform-origin: 0% 0% -50px;
   transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(135deg); }
 
-.x #space:hover #x1y1z1 {
-  transform: translateX(0) translateY(0) rotateX(-105deg) rotateY(-45deg) rotateZ(-90deg); }
+.y #space:hover #x1y1z1 {
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(90deg); }
+.y #space:hover #x1y2z1 {
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(90deg); }
+.y #space:hover #x2y1z1 {
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(90deg); }
+.y #space:hover #x2y2z1 {
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(90deg); }
+.y #space:hover #x1y1z2 {
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(270deg); }
+.y #space:hover #x1y2z2 {
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(270deg); }
+.y #space:hover #x2y1z2 {
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(270deg); }
+.y #space:hover #x2y2z2 {
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(270deg); }
 
-.x #space:hover #x1y2z1 {
-  transform: translateX(0) translateY(100px) rotateX(-105deg) rotateY(-45deg) rotateZ(-90deg); }
+.z #space:hover #x1y1z1 {
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(-135deg); }
+.z #space:hover #x1y2z1 {
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(-135deg); }
+.z #space:hover #x2y1z1 {
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(-135deg); }
+.z #space:hover #x2y2z1 {
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(-135deg); }
+.z #space:hover #x1y1z2 {
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(135deg); }
+.z #space:hover #x1y2z2 {
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(135deg); }
+.z #space:hover #x2y1z2 {
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(135deg); }
+.z #space:hover #x2y2z2 {
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(135deg); }
 
-.x #space:hover #x2y1z1 {
-  transform: translateX(100px) translateY(0) rotateX(-105deg) rotateY(-45deg) rotateZ(-90deg); }
+.y #space #x1y1z1, .y #space #x1y2z1, .y #space #x2y1z1, .y #space #x2y2z1, .y #space #x1y1z2, .y #space #x1y2z2, .y #space #x2y1z2, .y #space #x2y2z2, .y #space:hover #x1y1z1, .y #space:hover #x1y2z1, .y #space:hover #x2y1z1, .y #space:hover #x2y2z1, .y #space:hover #x1y1z2, .y #space:hover #x1y2z2, .y #space:hover #x2y1z2, .y #space:hover #x2y2z2, .z #space #x1y1z1, .z #space #x1y2z1, .z #space #x2y1z1, .z #space #x2y2z1, .z #space #x1y1z2, .z #space #x1y2z2, .z #space #x2y1z2, .z #space #x2y2z2, .z #space:hover #x1y1z1, .z #space:hover #x1y2z1, .z #space:hover #x2y1z1, .z #space:hover #x2y2z1, .z #space:hover #x1y1z2, .z #space:hover #x1y2z2, .z #space:hover #x2y1z2, .z #space:hover #x2y2z2 {
+  transition: transform 1.5s; }
 
-.x #space:hover #x2y2z1 {
-  transform: translateX(100px) translateY(100px) rotateX(-105deg) rotateY(-45deg) rotateZ(-90deg); }
+/* YTOP */
+.ytop #x1y1z1 {
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(-135deg);
+  transition: transform 0.3s; }
+.ytop #x2y1z1 {
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(-135deg);
+  transition: transform 0.3s; }
+.ytop #x1y1z2 {
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(45deg);
+  transition: transform 0.3s; }
+.ytop #x2y1z2 {
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(45deg);
+  transition: transform 0.3s; }
 
-.x #space:hover #x1y1z2 {
-  transform: translateX(0) translateY(0) rotateX(-105deg) rotateY(135deg) rotateZ(90deg); }
+/* REVYTOP */
+.revytop #x1y1z1 {
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(45deg);
+  transition: transform 0.3s; }
+.revytop #x2y1z1 {
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(45deg);
+  transition: transform 0.3s; }
+.revytop #x1y1z2 {
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(225deg);
+  transition: transform 0.3s; }
+.revytop #x2y1z2 {
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(225deg);
+  transition: transform 0.3s; }
 
-.x #space:hover #x1y2z2 {
-  transform: translateX(0) translateY(100px) rotateX(-105deg) rotateY(135deg) rotateZ(90deg); }
+/* YBOTTOM */
+.ybottom #x1y2z1 {
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(-135deg);
+  transition: transform 0.3s; }
+.ybottom #x2y2z1 {
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(-135deg);
+  transition: transform 0.3s; }
+.ybottom #x1y2z2 {
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(45deg);
+  transition: transform 0.3s; }
+.ybottom #x2y2z2 {
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(45deg);
+  transition: transform 0.3s; }
 
-.x #space:hover #x2y1z2 {
-  transform: translateX(100px) translateY(0) rotateX(-105deg) rotateY(135deg) rotateZ(90deg); }
+/* REVYBOTTOM */
+.revybottom #x1y2z1 {
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(45deg);
+  transition: transform 0.3s; }
+.revybottom #x2y2z1 {
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(45deg);
+  transition: transform 0.3s; }
+.revybottom #x1y2z2 {
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(225deg);
+  transition: transform 0.3s; }
+.revybottom #x2y2z2 {
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(225deg);
+  transition: transform 0.3s; }
 
-.x #space:hover #x2y2z2 {
-  transform: translateX(100px) translateY(100px) rotateX(-105deg) rotateY(135deg) rotateZ(90deg); }
+/* ZFRONT */
+.zfront #x1y1z1 {
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg);
+  transition: transform 0.3s; }
+.zfront #x1y2z1 {
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg);
+  transition: transform 0.3s; }
+.zfront #x2y1z1 {
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg);
+  transition: transform 0.3s; }
+.zfront #x2y2z1 {
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg);
+  transition: transform 0.3s; }
 
-.y #space:hover #x1y1z1, .ytop #x1y1z1 {
-  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(-135deg); }
+/* REVZFRONT */
+.revzfront #x1y1z1 {
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(90deg);
+  transition: transform 0.3s; }
+.revzfront #x1y2z1 {
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(90deg);
+  transition: transform 0.3s; }
+.revzfront #x2y1z1 {
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(90deg);
+  transition: transform 0.3s; }
+.revzfront #x2y2z1 {
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(90deg);
+  transition: transform 0.3s; }
 
-.y #space:hover #x1y2z1, .ybottom #x1y2z1 {
-  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(-135deg); }
+/* ZBACK */
+.zback #x1y1z2 {
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(90deg);
+  transition: transform 0.3s; }
+.zback #x1y2z2 {
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(90deg);
+  transition: transform 0.3s; }
+.zback #x2y1z2 {
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(90deg);
+  transition: transform 0.3s; }
+.zback #x2y2z2 {
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(90deg);
+  transition: transform 0.3s; }
 
-.y #space:hover #x2y1z1, .ytop #x2y1z1 {
-  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(-135deg); }
-
-.y #space:hover #x2y2z1, .ybottom #x2y2z1 {
-  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(-135deg); }
-
-.y #space:hover #x1y1z2, .ytop #x1y1z2 {
-  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(45deg); }
-
-.y #space:hover #x1y2z2, .ybottom #x1y2z2 {
-  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(45deg); }
-
-.y #space:hover #x2y1z2, .ytop #x2y1z2 {
-  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(45deg); }
-
-.y #space:hover #x2y2z2, .ybottom #x2y2z2 {
-  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(45deg); }
-
-.z #space:hover #x1y1z1, .zfront #x1y1z1 {
-  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg); }
-
-.z #space:hover #x1y2z1, .zfront #x1y2z1 {
-  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg); }
-
-.z #space:hover #x2y1z1, .zfront #x2y1z1 {
-  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg); }
-
-.z #space:hover #x2y2z1, .zfront #x2y2z1 {
-  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg); }
-
-.z #space:hover #x1y1z2, .zback #x1y1z2 {
-  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(90deg); }
-
-.z #space:hover #x1y2z2, .zback #x1y2z2 {
-  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(90deg); }
-
-.z #space:hover #x2y1z2, .zback #x2y1z2 {
-  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(90deg); }
-
-.z #space:hover #x2y2z2, .zback #x2y2z2 {
-  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(90deg); }
+/* REVZBACK */
+.revzback #x1y1z2 {
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(-90deg);
+  transition: transform 0.3s; }
+.revzback #x1y2z2 {
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(-90deg);
+  transition: transform 0.3s; }
+.revzback #x2y1z2 {
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(-90deg);
+  transition: transform 0.3s; }
+.revzback #x2y2z2 {
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(-90deg);
+  transition: transform 0.3s; }
 
 /*# sourceMappingURL=cube.css.map */
