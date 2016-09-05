@@ -1,5 +1,5 @@
 # Kostka Rubika 2x2x2
-Wirtualna wersja kostki mniejszej siostry kostki Rubika.
+Wirtualna wersja mniejszej siostry kostki Rubika.
 
 **Wersja demonstracyjna :** http://deykun.boo.pl/lab/rubik222/
 
