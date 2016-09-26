@@ -11,11 +11,11 @@ Wirtualna wersja mniejszej siostry kostki Rubika.
 ![](http://deykun.boo.pl/lab/rubik222/automieszanie.gif)
 
 ## Wersja 1.0
-Mieszanie kostki
+###Mieszanie kostki
 ![](http://deykun.boo.pl/lab/rubik222/mieszanie.gif)
 
-Podgląd niewidocznych ścian kostki
+###Podgląd niewidocznych ścian kostki
 ![](http://deykun.boo.pl/lab/rubik222/podglad.gif)
 
-Transparentna wersja kostki
+###Transparentna wersja kostki
 ![](http://deykun.boo.pl/lab/rubik222/glass.gif)
