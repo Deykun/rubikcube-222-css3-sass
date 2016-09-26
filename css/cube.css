@@ -2,7 +2,7 @@
 /* Cubes positions */
 /* Default rotation */
 /* Default sides */
-html, body {
+html, body, h2, p {
   margin: 0;
   padding: 0; }
 
@@ -10,86 +10,57 @@ body {
   color: #fff;
   font-family: 'Roboto', sans-serif;
   text-align: center;
-  background-color: #444; }
+  background-color: #4A3333; }
 
-.moves, .settings, .view {
+#help {
+  display: none;
+  z-index: 100;
+  background-color: #352626;
+  height: 100vh;
+  width: 100vw; }
+
+.help {
+  opacity: .15; }
+
+#help > div {
   position: fixed;
-  padding: 10px;
-  text-align: center;
-  color: #444;
-  background-color: #fff;
-  background: linear-gradient(to top, #ececec, #fff); }
-  @media (max-width: 500px) {
-    .moves, .settings, .view {
-      padding: 2px; } }
-  .moves section, .settings section, .view section {
-    margin: 10px;
-    display: inline-block;
-    width: 140px; }
-    @media (max-width: 500px) {
-      .moves section, .settings section, .view section {
-        width: 105px; } }
-
-.moves {
-  bottom: 0;
-  width: 100%;
-  padding-bottom: 5px; }
-
-.settings {
-  top: 0;
-  right: 0;
-  border-bottom-left-radius: 15px;
-  width: 100px;
-  padding-top: 5px; }
-
-.view {
-  top: 0;
-  left: 0;
-  border-bottom-right-radius: 15px;
-  width: 100px;
-  padding-top: 5px; }
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
 
 button {
-  height: 40px;
-  background-color: #444;
-  border: 5px solid #444;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 200;
   font-family: 'Roboto', sans-serif;
   color: #fff;
-  transition: .3s; }
-  @media (max-width: 500px) {
-    button {
-      height: 30px; } }
-  button.left {
-    width: 90px;
-    border-right-color: #fff;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px; }
-    @media (max-width: 500px) {
-      button.left {
-        width: 75px;
+  border: 2px dashed #fff;
+  background-color: #4A3333; }
+  button:hover {
+    transform: scale(1.2); }
+
+.box {
+  height: 50px;
+  width: 50px;
+  margin: 10px;
+  transition: .3s;
+  border-radius: 10px; }
+  @media (max-width: 650px) {
+    .box {
+      height: 30px;
+      width: 30px; } }
+  @media (max-width: 650px) {
+    .box {
+      margin: 5px; } }
+  #help .box {
+    display: inline-block;
+    border: 2px solid #fff;
+    line-height: 50px; }
+    @media (max-width: 650px) {
+      #help .box {
+        line-height: 30px;
         font-size: 60%; } }
-  button.left:hover {
-    border-color: #000 #fff #000 #000;
-    background-color: #000; }
-  button.right {
-    width: 40px;
-    color: #444;
-    border-color: #444;
-    background-color: #fff;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px; }
-    @media (max-width: 500px) {
-      button.right {
-        width: 30px;
-        font-size: 60%; } }
-  button.right:hover {
-    color: #fff;
-    background-color: #444; }
-  button.viewpoint {
-    border-radius: 15px; }
-  button.selected {
-    background-color: #000;
-    border-color: #000; }
 
 * {
   box-sizing: border-box; }
@@ -99,7 +70,7 @@ button {
   width: 200px;
   height: 200px;
   position: fixed;
-  top: 25%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   perspective: 850px; }
@@ -114,7 +85,7 @@ button {
 
 .solid > .cube > div {
   position: absolute;
-  background: linear-gradient(to right top, #3a3a3a, #2f2f2f);
+  background: radial-gradient(circle, #3a3a3a, #2f2f2f);
   border: 2px solid rgba(58, 58, 58, 0.4);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
   backface-visibility: hidden;
@@ -146,22 +117,22 @@ button {
   border-radius: 50%; }
 
 .white {
-  background: linear-gradient(to right top, #d1d1d1, #fff); }
+  background: radial-gradient(circle, #d1d1d1, #fff); }
 
 .yellow {
-  background: linear-gradient(to right top, #efd038, #dab919); }
+  background: radial-gradient(circle, #efd038, #dab919); }
 
 .blue {
-  background: linear-gradient(to right top, #318edd, #257ac2); }
+  background: radial-gradient(circle, #318edd, #257ac2); }
 
 .green {
-  background: linear-gradient(to right top, #72ae2b, #8ad137); }
+  background: radial-gradient(circle, #72ae2b, #8ad137); }
 
 .red {
-  background: linear-gradient(to right top, #a0270f, #ae4b1b); }
+  background: radial-gradient(circle, #a0270f, #ae4b1b); }
 
 .orange {
-  background: linear-gradient(to right top, #d97d50, #d86a35); }
+  background: radial-gradient(circle, #d97d50, #d86a35); }
 
 /* TOP */
 #x1y1z1.cube .top {
@@ -294,114 +265,93 @@ button {
 
 /* YTOP */
 .ytop #x1y1z1 {
-  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(-135deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(-135deg); }
 .ytop #x2y1z1 {
-  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(-135deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(-135deg); }
 .ytop #x1y1z2 {
-  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(45deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(45deg); }
 .ytop #x2y1z2 {
-  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(45deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(45deg); }
 
 /* REVYTOP */
 .revytop #x1y1z1 {
-  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(45deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(45deg); }
 .revytop #x2y1z1 {
-  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(45deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(45deg); }
 .revytop #x1y1z2 {
-  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(225deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(225deg); }
 .revytop #x2y1z2 {
-  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(225deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(225deg); }
 
 /* YBOTTOM */
 .ybottom #x1y2z1 {
-  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(-135deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(-135deg); }
 .ybottom #x2y2z1 {
-  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(-135deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(-135deg); }
 .ybottom #x1y2z2 {
-  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(45deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(45deg); }
 .ybottom #x2y2z2 {
-  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(45deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(45deg); }
 
 /* REVYBOTTOM */
 .revybottom #x1y2z1 {
-  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(45deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(45deg); }
 .revybottom #x2y2z1 {
-  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(45deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(45deg); }
 .revybottom #x1y2z2 {
-  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(225deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(225deg); }
 .revybottom #x2y2z2 {
-  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(225deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(225deg); }
 
 /* ZFRONT */
 .zfront #x1y1z1 {
-  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg); }
 .zfront #x1y2z1 {
-  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg); }
 .zfront #x2y1z1 {
-  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg); }
 .zfront #x2y2z1 {
-  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(-90deg); }
 
 /* REVZFRONT */
 .revzfront #x1y1z1 {
-  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(90deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(90deg); }
 .revzfront #x1y2z1 {
-  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(90deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(90deg); }
 .revzfront #x2y1z1 {
-  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(90deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(-45deg) rotateZ(90deg); }
 .revzfront #x2y2z1 {
-  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(90deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(-45deg) rotateZ(90deg); }
 
 /* ZBACK */
 .zback #x1y1z2 {
-  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(90deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(90deg); }
 .zback #x1y2z2 {
-  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(90deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(90deg); }
 .zback #x2y1z2 {
-  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(90deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(90deg); }
 .zback #x2y2z2 {
-  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(90deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(90deg); }
 
 /* REVZBACK */
 .revzback #x1y1z2 {
-  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(-90deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(-90deg); }
 .revzback #x1y2z2 {
-  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(-90deg);
-  transition: transform 0.3s; }
+  transform: translateX(0) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(-90deg); }
 .revzback #x2y1z2 {
-  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(-90deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(0) rotateX(-15deg) rotateY(135deg) rotateZ(-90deg); }
 .revzback #x2y2z2 {
-  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(-90deg);
-  transition: transform 0.3s; }
+  transform: translateX(100px) translateY(100px) rotateX(-15deg) rotateY(135deg) rotateZ(-90deg); }
+
+.ytop #space #x1y1z1, .ytop #space #x1y2z1, .ytop #space #x2y1z1, .ytop #space #x2y2z1, .ytop #space #x1y1z2, .ytop #space #x1y2z2, .ytop #space #x2y1z2, .ytop #space #x2y2z2, .revytop #space #x1y1z1, .revytop #space #x1y2z1, .revytop #space #x2y1z1, .revytop #space #x2y2z1, .revytop #space #x1y1z2, .revytop #space #x1y2z2, .revytop #space #x2y1z2, .revytop #space #x2y2z2, .ybottom #space #x1y1z1, .ybottom #space #x1y2z1, .ybottom #space #x2y1z1, .ybottom #space #x2y2z1, .ybottom #space #x1y1z2, .ybottom #space #x1y2z2, .ybottom #space #x2y1z2, .ybottom #space #x2y2z2, .revybottom #space #x1y1z1, .revybottom #space #x1y2z1, .revybottom #space #x2y1z1, .revybottom #space #x2y2z1, .revybottom #space #x1y1z2, .revybottom #space #x1y2z2, .revybottom #space #x2y1z2, .revybottom #space #x2y2z2,
+.zfront #space #x1y1z1,
+.zfront #space #x1y2z1,
+.zfront #space #x2y1z1,
+.zfront #space #x2y2z1,
+.zfront #space #x1y1z2,
+.zfront #space #x1y2z2,
+.zfront #space #x2y1z2,
+.zfront #space #x2y2z2, .revzfront #space #x1y1z1, .revzfront #space #x1y2z1, .revzfront #space #x2y1z1, .revzfront #space #x2y2z1, .revzfront #space #x1y1z2, .revzfront #space #x1y2z2, .revzfront #space #x2y1z2, .revzfront #space #x2y2z2, .zback #space #x1y1z1, .zback #space #x1y2z1, .zback #space #x2y1z1, .zback #space #x2y2z1, .zback #space #x1y1z2, .zback #space #x1y2z2, .zback #space #x2y1z2, .zback #space #x2y2z2, .revzback #space #x1y1z1, .revzback #space #x1y2z1, .revzback #space #x2y1z1, .revzback #space #x2y2z1, .revzback #space #x1y1z2, .revzback #space #x1y2z2, .revzback #space #x2y1z2, .revzback #space #x2y2z2 {
+  transition: transform 0.16s; }
 
 /*# sourceMappingURL=cube.css.map */

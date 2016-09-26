@@ -1,18 +1,33 @@
 // Czas trwania ruchu
-var moveduration = 300;
+var moveduration = 160;
 
 function changeCube() {
 	if ($('#space').hasClass('solid')) {
-		$('#space').removeClass().addClass('glass');
+		$('#space').removeClass('solid').addClass('glass');
 	}	else {
-		$('#space').removeClass().addClass('solid')
+		$('#space').removeClass('glass').addClass('solid');
 		}
 }
 
+function toggleHelp() {
+	$('#help').toggle();
+	if ($('#space').hasClass('help')){
+		$('#space').removeClass('help');
+	}	else {
+		$('#space').addClass('help');
+	}
+
+}
+
 function makeMove(move,polecenie) {
+	// Przerywa wywołanie funkcji jeśli ta już została wywołana
+	var noop = $('body').attr('class');
+	if (noop !== 'z' && noop !== 'y' && noop !== '') {
+		return;
+	}
+
 	// id - ytop, ybottom bezpośrednio określa ruch
-	var id = this.id
-	if (move === 'rotate') { id=polecenie; } // możnaby napisac funkcje pobierającą polecenia z kliknięć na kostce i wywołującą obrót tutaj to opcja pobierania id nie ze zdarzenia click przycisku, a wywowłania makeMove('rotate','ytop') w innej funkcji
+	var id = polecenie;
 
 	// Obrót w poziomie
 	if (id === 'ytop' || id === 'revytop' || id === 'ybottom' || id === 'revybottom') {
@@ -174,18 +189,83 @@ function makeMove(move,polecenie) {
 
 	/* Podglądy */
 	else {
-		if ($('body').hasClass(id)){
-			$('body').removeClass();
-		}	else {
 			$('body').removeClass().addClass(id);
-		}}
-
-	$('button').removeClass('selected');
-	var selected = $('body').attr('class');
-	if (selected === 'y' || selected === 'z'){
-		$('#'+selected).addClass('selected');
-	}
+		}
 }
 
-$('.moves button, .view button').click( makeMove );
-$('.settings button').click( changeCube );
+$('#keys').click(toggleHelp);
+
+$(document).keydown(function(e) {
+    switch(e.which) {
+        case 81: // Q
+				makeMove('rotate','ytop');
+        break;
+
+        case 65: // A
+				makeMove('rotate','ybottom');
+        break;
+
+				case 87: // W
+				makeMove('rotate','zfront');
+        break;
+
+        case 83: // S
+				makeMove('rotate','revzfront');
+        break;
+
+				case 69: // E
+				makeMove('rotate','zback');
+				break;
+
+				case 68: // D
+				makeMove('rotate','revzback');
+				break;
+
+				case 82: // R
+				makeMove('rotate','revytop');
+        break;
+
+				case 70: // F
+				makeMove('rotate','revybottom');
+				break;
+
+				case 70: // F
+				makeMove('rotate','revybottom');
+				break;
+
+				case 90: // Z - podgląd kostki
+				makeMove('rotate','z');
+				break;
+
+				case 88: // X - podgląd kostki
+				makeMove('rotate','y');
+				break;
+
+				case 78: // N - zmiana wyglądu
+				changeCube();
+				break;
+
+				case 77: // M - funkcja mieszająca kostkę
+				var ymix = ['revytop','revybottom','ytop','ybottom'];
+				var zmix = ['zback', 'zfront','revzback','revzfront'];
+
+				var i = 0;
+				var mixing = setInterval( function () {
+						if (i < 27) {
+							// Obrót kostki do osi X
+							if (i === 12) {
+								makeMove('rotate','ytop'); i++;
+							} else if (i === 13) {
+								makeMove('rotate','ybottom'); i++;
+							} else if (i % 2 == 0) {
+								makeMove('rotate',ymix[Math.floor((Math.random() * ymix.length) + 0)]); i++;
+							} else {
+								makeMove('rotate',zmix[Math.floor((Math.random() * zmix.length) + 0)]); i++;
+							}
+						} else { clearTimeout(mixing); }}, moveduration+120);
+				break;
+
+        default:
+				return;
+    }
+});
